@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>시외버스 - 회원가입</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <link href="css/join.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap"
+          rel="stylesheet"
+  />
+</head>
+<body>
+<div class="wrapper">
+  <h1><a href="index.html">시외버스</a></h1>
+  <div class="signUpTitle">시외버스 회원가입</div>
+
+  <input class="form" id="email" placeholder="이메일을 입력해주세요." />
+  <!-- <div class="error" id="error_email"></div> -->
+  <input class="form" id="writer" placeholder="이름을 입력해 주세요." />
+  <!-- <div class="error" id="error_writer"></div> -->
+  <input
+          class="form"
+          id="pwd1"
+          type="password"
+          placeholder="비밀번호를 입력해 주세요."
+  />
+  <!-- <div class="error" id="error_pwd1"></div> -->
+  <input
+          class="form"
+          id="pwd2"
+          type="password"
+          placeholder="비밀번호를 다시 입력해 주세요."
+  />
+  <!-- <div class="error" id="error_pwd2"></div> -->
+  <input class="form" id="phone" placeholder="휴대폰 번호를 입력하세요" />
+
+  <select class="area" id="area">
+    <option value="">지역을 선택하세요</option>
+    <option value="1">서울</option>
+    <option value="2">경기</option>
+    <option value="3">인천</option>
+  </select>
+  <div class="gender" id="gender">
+    <input type="radio" name="gender" />여성
+    <input type="radio" name="gender" />남성
+  </div>
+  <div class="divideLine"></div>
+  <button type="button" id="signUp" class="signUp">가입하기</button>
+</div>
+
+</body>
+</html>
