@@ -148,7 +148,8 @@ public class testController {
     @RequestMapping("/Nlogin/invalidate")
     public String invalidateSession(HttpSession session) {
         session.invalidate();
-        return "redirect:/Nlogin";
+//        return "redirect:/Nlogin";
+        return "redirect:/login";
     }
     /**
      * 서버 통신 메소드
