@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${rootPath}/static/css/main.css" rel="stylesheet" >
 </head>
 <body>
 <body class="slide-in">
@@ -20,7 +21,7 @@
         <div id="top">
           <div id="title_top">
             <h1>시외버스</h1>
-            <h1><a href="login.html">로그인</a></h1>
+            <h1><a href="${rootPath}/login">로그인</a></h1>
             <h1><a href="join.html">회원가입</a></h1>
           </div>
           <section>
