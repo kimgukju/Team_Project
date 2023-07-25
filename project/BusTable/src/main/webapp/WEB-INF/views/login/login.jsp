@@ -25,7 +25,7 @@
       </div>
       <div class="divideLine"></div>
       <button class="login" id="login_button">로그인</button>
-      <button class="login">Naver 로그인</button>
+      <button class="login"><a href="${rootPath}/Nlogin">Naver 로그인</a></button>
       <div class="login_etc">
         <a href="join.html">회원가입</a> |
         <a href="findIdPw.html">아이디/비번찾기</a>

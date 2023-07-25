@@ -12,7 +12,8 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
-	
 	</bean>
 	<mvc:annotation-driven/>
+	
+	<bean id="naverLoginBO" class="com.callor.bus.oauth.bo.NaverLoginBO" />
 </beans>
