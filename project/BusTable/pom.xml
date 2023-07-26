@@ -72,8 +72,6 @@
 			<version>${org.slf4j-version}</version>
 		</dependency>
 
-
-
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

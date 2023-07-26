@@ -9,6 +9,6 @@
 <title>네이버 로그인 연습</title>
 </head>
 <body>
-	<div>응애</div>
+	<div style="text-align:center">${result}</div>
 </body>
 </html>

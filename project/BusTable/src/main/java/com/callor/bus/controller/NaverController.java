@@ -1,13 +1,17 @@
 package com.callor.bus.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.callor.bus.oauth.bo.NaverLoginBO;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
 public class NaverController {
@@ -29,9 +33,10 @@ public class NaverController {
     }
  
 	@RequestMapping("/Ncallback")
-    public ModelAndView callback() {
-        String message = "Simple Callback Page";
-        return new ModelAndView("Ncallback", "message", message);
+    public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException{
+		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		String apiResult = naverLoginBO.getUserProfile(oauthToken);
+        return new ModelAndView("Ncallback","result","apiResult");
     }
 
 }
