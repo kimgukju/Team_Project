@@ -19,11 +19,11 @@ public class NaverController {
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 
-//	/* NaverLoginBO */
-//	@Autowired
-//	private void setNaverLoginBO(NaverLoginBO naverLoginBO){
-//		this.naverLoginBO = naverLoginBO;
-//	}
+	/* NaverLoginBO */
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO){
+		this.naverLoginBO = naverLoginBO;
+	}
 	
 	
 	@RequestMapping("/Nlogin")
@@ -36,7 +36,7 @@ public class NaverController {
     public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException{
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
-        return new ModelAndView("Ncallback","result","apiResult");
+        return new ModelAndView("Ncallback","result", apiResult);
     }
 
 }

@@ -37,7 +37,7 @@ public class NaverLoginBO {
 				.apiKey(CLIENT_ID)
 				.apiSecret(CLIENT_SECRET)
 				.callback(REDIRECT_URI)
-				.state("RANDOM_STRING")
+				.state(state)
 				.build(NaverLoginApi.instance());
 
 		return oauthService.getAuthorizationUrl();

@@ -7,7 +7,8 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/naverlogintutorial-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/naverlogin-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/mybatis-context.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
