@@ -23,34 +23,39 @@
 		</h1>
 		<div class="findTitle">시외버스 ID/PW 찾기</div>
 
-		<form class="findID" method="POST" action="${rootPath}/find_Id">
+		<form method="POST" action="${rootPath}/findIdPw">
 			<div class="subTitle">ID 찾기</div>
 			<div>
-				<input class="form" id="u_name" name="u_name"
+				<input class="form" type="text" id="u_name" name="u_name"
 					placeholder="이름을 입력해 주세요." />
 			</div>
 			<div>
-				<input class="form" id="u_tel" name="u_tel"
+				<input class="form" type="text" id="u_tel" name="u_tel"
 					placeholder="휴대폰 번호를 입력해 주세요." />
 			</div>
-			<button type="button" class="find_button" id="find_button1">
-				아이디 찾기</button>
-		</form>
 
-		<form class="findPW" method="POST" action="${rootPath}/find_Pw">
+			<button type="submit" class="find_button" id="find_button1">
+				아이디 찾기</button>
+			<c:choose>
+				<c:when test="${empty F_ID }">
+					<div>정보 없음</div>
+				</c:when>
+				<c:otherwise>
+					<div>내 아이디 : ${F_ID.u_mail}</div>
+				</c:otherwise>
+			</c:choose>
+
 			<div class="subTitle">PASSWORD 찾기</div>
 			<div>
-				<input class="form" id="u_mail" name="u_mail"
-					placeholder="이메일을 입력해주세요." />
+				<input class="form" placeholder="이메일을 입력해주세요." />
 			</div>
 			<div>
-				<input class="form" id="u_tel" name="u_tel"
-					placeholder="휴대폰 번호를 입력해 주세요." />
+				<input class="form" placeholder="휴대폰 번호를 입력해 주세요." />
 			</div>
 			<button type="submit" class="find_button" id="find_button2">
 				비밀번호 찾기</button>
 		</form>
-	</div>
 
+	</div>
 </body>
 </html>

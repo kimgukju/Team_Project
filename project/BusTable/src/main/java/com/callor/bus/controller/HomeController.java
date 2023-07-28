@@ -2,6 +2,7 @@ package com.callor.bus.controller;
 
 import java.util.Locale;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,6 +55,52 @@ public class HomeController {
 		return "login/findIdPw";
 	}
 	
+	@RequestMapping(value = "/find_Id", method = RequestMethod.POST)
+	public String findIdPw( @Param("u_name")String u_name, @Param("u_tel") String u_tel,
+							Model model
+							) {
+		UserDto dto = userService.findId(u_name, u_tel);
+		model.addAttribute("F_ID",dto);
+		
+//		return "redirect:/findIdPw";
+		return "login/find_id";
+	}
+//	
+//	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+//	public String findId( @Param("u_name")String u_name, @Param("u_tel") String u_tel,
+//							Model model
+//							) {
+//		UserDto dto = userService.findId(u_name, u_tel);
+//		model.addAttribute("F_ID",dto);
+//		
+////		return "redirect:/findIdPw";
+//		return "login/find_id";
+//	}
+	
+	@RequestMapping(value="/find_Id",method=RequestMethod.GET)
+	public String findId() {
+		
+		return "login/find_id";
+	
+}
+	@RequestMapping(value="/find_Pw",method=RequestMethod.GET)
+	public String findPw() {
+	
+		return "login/find_pw";
+	}
+	
+	@RequestMapping(value="/find_Pw",method=RequestMethod.POST)
+	public String findPw(@Param("u_mail")String u_mail, @Param("u_tel") String u_tel,
+						Model model) {
+		
+		UserDto dto = userService.findPw(u_mail, u_tel);
+		model.addAttribute("F_ID",dto);
+		return "login/find_pw";
+		
+	}
+	
+
+ 	
 	@ModelAttribute("USER")
 	public UserDto newMember() {
 		return UserDto.builder().build();

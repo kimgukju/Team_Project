@@ -72,23 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
-    // const select = document.getElementById("area").value;
-    if (!document.getElementById("area").value) {
-      alert("지역을 선택해주세요");
-      area.focus();
-      return false;
-    }
-    const radio_check = document.querySelector(
-      "input[type=radio][name=gender]:checked"
-    );
-    if (!radio_check) {
-      alert("성별을 선택해주세요");
-      return false;
-    }
-
     // 조건 다 충족시 + login 창이동
+
+    document.querySelector("form#USER").submit();
+    // form.submit();
     alert("회원가입완료!");
-    window.location.href = "login.html";
+
+    // window.location.href = "login.html";
   };
   document.querySelector("#signUp").addEventListener("click", join);
 });

@@ -21,4 +21,18 @@ public class UserServiceImplV1 implements UserService{
 		return userDao.insert(userDto);
 	}
 
+
+	@Override
+	public UserDto findId(String u_name, String u_tel) {
+		// TODO Auto-generated method stub
+		return userDao.findById(u_name, u_tel);
+	}
+
+
+	@Override
+	public UserDto findPw(String u_mail, String u_tel) {
+		// TODO Auto-generated method stub
+		return userDao.findByPw(u_mail, u_tel);
+	}
+
 }

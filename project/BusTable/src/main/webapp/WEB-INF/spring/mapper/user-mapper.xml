@@ -7,9 +7,10 @@
  
  	<insert id="insert">
  	INSERT INTO tbl_user (
-		u_mail, u_name, u_password, u_tel, u_area, u_gender
+		u_mail, u_name, u_password, u_tel
 	) VALUES ( 
-    	#{u_mail},#{u_name},#{u_password},#{u_tel},#{u_area},#{u_gender}
+    	#{u_mail},#{u_name},#{u_password},#{u_tel}
 	)
  	</insert>
+ 	
  </mapper> 
