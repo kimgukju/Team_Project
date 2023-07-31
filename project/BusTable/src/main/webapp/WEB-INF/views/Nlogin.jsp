@@ -9,6 +9,6 @@
 <title>네이버 로그인 연습</title>
 </head>
 <body>
-	<div style="text-align:center"><a href="${url}">NaverIdLogin</a></div>
+	<script> self.location = '${url}';</script>
 </body>
 </html>

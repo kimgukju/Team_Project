@@ -9,6 +9,9 @@
 <title>네이버 로그인 연습</title>
 </head>
 <body>
-	<div style="text-align:center">${result}</div>
+	<div style="text-align:center"><strong>로그인된 정보</strong>${result}</div>
+	
+	<div><a href = "${rootPath}">홈으로</a></div>
+	
 </body>
 </html>
