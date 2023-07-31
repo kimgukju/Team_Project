@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여긴 나의 비번이다</title>
+<title>비밀번호 찾기</title>
 </head>
 <body>
 	<c:choose>
@@ -14,7 +14,7 @@
 			<div>정보 없음</div>
 		</c:when>
 		<c:otherwise>
-			<div>내 비밀번호 : ${F_ID.u_password} </div>
+			<div>내 비밀번호 : ${F_ID.bu_password} </div>
 		</c:otherwise>
 	</c:choose>
 	

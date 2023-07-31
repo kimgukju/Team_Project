@@ -6,17 +6,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여긴 나의 아이디다</title>
+<title>ID 찾기</title>
+<link rel="stylesheet"
+	href="${rootPath}/resources/css/find_idpw.css?${version}" />
 </head>
 <body>
+<div class="wrapper">
+		<h1>
+			<a href="${rootPath}/">시외버스</a>
+		</h1>
+		<div class="findTitle">시외버스 ID/PW 찾기</div>
+		<div>
 	<c:choose>
 		<c:when test="${empty F_ID }">
 			<div>정보 없음</div>
 		</c:when>
 		<c:otherwise>
-			<div>내 아이디 : ${F_ID.u_mail} </div>
+			<div>내 아이디 : ${F_ID.bu_id} </div>
 		</c:otherwise>
 	</c:choose>
+		</div>
+</div>
 	
 </body>
 </html>

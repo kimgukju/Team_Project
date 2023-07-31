@@ -26,11 +26,11 @@
 		<form class="findID" method="POST" action="${rootPath}/find_Id">
 			<div class="subTitle">ID 찾기</div>
 			<div>
-				<input class="form" id="u_name" name="u_name"
+				<input class="form" id="bu_name" name="bu_name"
 					placeholder="이름을 입력해 주세요." />
 			</div>
 			<div>
-				<input class="form" id="u_tel" name="u_tel"
+				<input class="form" id="bu_tel" name="bu_tel"
 					placeholder="휴대폰 번호를 입력해 주세요." />
 			</div>
 			<button type="button" class="find_button" id="find_button1">
@@ -40,14 +40,14 @@
 		<form class="findPW" method="POST" action="${rootPath}/find_Pw">
 			<div class="subTitle">PASSWORD 찾기</div>
 			<div>
-				<input class="form" id="u_mail" name="u_mail"
+				<input class="form" id="bu_id" name="bu_id"
 					placeholder="이메일을 입력해주세요." />
 			</div>
 			<div>
-				<input class="form" id="u_tel" name="u_tel"
+				<input class="form" id="bu_tel" name="bu_tel"
 					placeholder="휴대폰 번호를 입력해 주세요." />
 			</div>
-			<button type="submit" class="find_button" id="find_button2">
+			<button type="button" class="find_button" id="find_button2">
 				비밀번호 찾기</button>
 		</form>
 	</div>
