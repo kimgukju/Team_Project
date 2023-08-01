@@ -10,4 +10,6 @@ public interface UserService {
 
 	public UserDto findPw(String u_mail, String u_tel);
 
+	public int ninsert(UserDto userDto);
+
 }

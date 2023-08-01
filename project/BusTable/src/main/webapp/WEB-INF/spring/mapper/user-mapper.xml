@@ -6,11 +6,21 @@
  <mapper namespace="com.callor.bus.dao.UserDao">
  
  	<insert id="insert">
- 	INSERT INTO tbl_user (
-		u_mail, u_name, u_password, u_tel
+ 	INSERT INTO tbl_bus_user (
+		bu_id, bu_name, bu_password, bu_tel
 	) VALUES ( 
-    	#{u_mail},#{u_name},#{u_password},#{u_tel}
+    	#{bu_id},#{bu_name},#{bu_password},#{bu_tel}
 	)
  	</insert>
  	
+ 	<insert id="ninsert">
+ 	INSERT INTO tbl_bus_user (
+ 		bu_id, bu_name
+ 	) VALUES (
+ 		#{id},#{name}
+ 	)
+ 	
+ 	
+ 	
+ 	</insert>
  </mapper> 

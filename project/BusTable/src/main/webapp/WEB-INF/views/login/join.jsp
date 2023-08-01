@@ -26,22 +26,22 @@
 		<div class="signUpTitle">시외버스 회원가입</div>
 		<f:form modelAttribute="USER">
 			<div>
-				<f:input class="form" path="u_mail"
+				<f:input class="form" path="bu_id"
 					placeholder="이메일을 입력해주세요." />
 			</div>
 			<div>
-				<f:input class="form" path="u_name" placeholder="이름을 입력해 주세요." />
+				<f:input class="form" path="bu_name" placeholder="이름을 입력해 주세요." />
 			</div>
 			<div>
-				<f:input class="form" path="u_password" type="password"
+				<f:input class="form" path="bu_password" type="password"
 					placeholder="비밀번호를 입력해 주세요." />
 			</div>
 			<div>
-				<input class="form" id="u_password2" type="password"
+				<input class="form" id="bu_password2" type="password"
  					placeholder="비밀번호를 다시 입력해 주세요." /> 
 			</div>
 			<div>
-			<f:input class="form" path="u_tel" placeholder="휴대폰 번호를 입력하세요" />
+			<f:input class="form" path="bu_tel" placeholder="휴대폰 번호를 입력하세요" />
 			</div>
 			<div class="divideLine"></div>
 			<button type="button" id="signUp" class="signUp">가입하기</button>

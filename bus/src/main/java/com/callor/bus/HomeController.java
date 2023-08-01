@@ -5,16 +5,26 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.callor.bus.dao.BusDao;
+import com.callor.bus.dto.RequestMessage;
+import com.callor.bus.dto.TerDriveVO;
+import com.callor.bus.dto.TerLinkVO;
 import com.callor.bus.dto.UserDto;
 import com.callor.bus.dto.UsuallyDto;
 import com.callor.bus.service.BusService;
+import com.callor.bus.service.LoadDB;
+import com.callor.bus.service.SaveDB;
+import com.callor.bus.utils.Utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,9 +33,16 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 
 	private final BusService busService;
+	private final SaveDB saveDB;
+	private final LoadDB loadDB;
+	private final BusDao busDao;
 
-	public HomeController(BusService busService) {
+	@Autowired
+	public HomeController(BusService busService, SaveDB saveDB, LoadDB loadDB, BusDao busDao) {
 		this.busService = busService;
+		this.saveDB = saveDB;
+		this.loadDB = loadDB;
+		this.busDao = busDao;
 	}
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
@@ -62,7 +79,7 @@ public class HomeController {
 
 		if (dto == null) {
 			busService.insert(userDto);
-			return "redirect:/";
+			return "home";
 		} else {
 			model.addAttribute("SAMEID", "이미 존재하는 ID 입니다");
 			return "join";
@@ -158,59 +175,144 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = "/nosun", method = RequestMethod.GET)
-	public String gonusun(String scode, String ecode, Model model) {
-		
+	@ResponseBody
+	@RequestMapping(value = "/mypage/savedb", method = RequestMethod.GET)
+	public RequestMessage saveDB(Model model, HttpSession httpSession) {
+
+		RequestMessage message = new RequestMessage();
+
+		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
+		if (userDto != null) {
+			String id = userDto.getBu_id();
+			if (id.equals("test")) {
+				try {
+					saveDB.saveTerDB();
+					saveDB.saveTerLinkDB();
+					saveDB.saveTerDriveDB();
+					saveDB.saveTerScheduleDB();
+
+					message.setMessage("DB저장에 성공했습니다");
+
+					return message;
+				} catch (JSONException e) {
+
+					message.setMessage("DB저장에 실패했습니다");
+
+					return message;
+				}
+
+			} else {
+				message.setMessage("권한이 없습니다");
+
+				return message;
+			}
+		} else {
+			message.setMessage("권한이 없습니다");
+
+			return message;
+		}
+	}
+
+	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
+	public String searchBus(Model model, @RequestParam(required = false, defaultValue = "default") String scode,
+			@RequestParam(required = false, defaultValue = "default") String ecode) {
+
 		UsuallyDto usDto = new UsuallyDto();
 		usDto.setUs_stcode(scode);
 		usDto.setUs_etcode(ecode);
 		model.addAttribute("USNOSUN", usDto);
-		
-		return "nosun";
+
+		List<TerLinkVO> terlist = loadDB.loadDepTerData();
+		model.addAttribute("DEPTERS", terlist);
+		return "searchbus";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
+	public RequestMessage bookmark(String depTerId, String arrTerId, String depTerName, String arrTerName,
+			HttpSession httpSession) {
+		UsuallyDto usuallyDto = new UsuallyDto();
+		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
+
+		usuallyDto.setUs_buid(userDto.getBu_id());
+		usuallyDto.setUs_stcode(depTerId);
+		usuallyDto.setUs_etcode(arrTerId);
+		usuallyDto.setS_terminal(depTerName.trim());
+		usuallyDto.setE_terminal(arrTerName);
+
+		int result = busDao.usuallyinsert(usuallyDto);
+		RequestMessage message = new RequestMessage();
+
+		if (result != 0) {
+			message.setMessage("즐겨찾기 추가에 성공했습니다");
+		} else {
+			message.setMessage("즐겨찾기에 실패했습니다");
+		}
+
+		return message;
 	}
 	
 	// 비밀번호찾기 
-		@RequestMapping(value = "/findIdPw", method = RequestMethod.GET)
-		public String findIdPw() {
+			@RequestMapping(value = "/findIdPw", method = RequestMethod.GET)
+			public String findIdPw() {
 
-			return "login/findIdPw";
-		}
-		
-		@RequestMapping(value = "/find_Id", method = RequestMethod.POST)
-		public String findIdPw(@Param("bu_name") String bu_name, @Param("bu_tel") String bu_tel,
-								Model model
-								) {
-			UserDto dto = busService.findId(bu_name, bu_tel);
-			model.addAttribute("F_ID",dto);
+				return "login/findIdPw";
+			}
 			
+			@RequestMapping(value = "/find_Id", method = RequestMethod.POST)
+			public String findIdPw(@Param("bu_name") String bu_name, @Param("bu_tel") String bu_tel,
+									Model model
+									) {
+				UserDto dto = busService.findId(bu_name, bu_tel);
+				model.addAttribute("F_ID",dto);
+				
 
-			return "login/find_id";
-		}
-		
-		@RequestMapping(value="/find_Id",method=RequestMethod.GET)
-		public String findId() {
+				return "login/find_id";
+			}
 			
-			return "login/find_id";
-		
-	}
-		@RequestMapping(value="/find_Pw",method=RequestMethod.GET)
-		public String findPw() {
-		
-			return "login/find_pw";
-		}
-		
-		@RequestMapping(value="/find_Pw",method=RequestMethod.POST)
-		public String findPw(@Param("bu_id")String bu_id, @Param("bu_tel") String bu_tel,
-							Model model) {
-			
-			UserDto dto = busService.findPw(bu_id, bu_tel);
-			model.addAttribute("F_ID",dto);
-			return "login/find_pw";
+			@RequestMapping(value="/find_Id",method=RequestMethod.GET)
+			public String findId() {
+				
+				return "login/find_id";
 			
 		}
+			@RequestMapping(value="/find_Pw",method=RequestMethod.GET)
+			public String findPw() {
+			
+				return "login/find_pw";
+			}
+			
+			@RequestMapping(value="/find_Pw",method=RequestMethod.POST)
+			public String findPw(@Param("bu_id")String bu_id, @Param("bu_tel") String bu_tel,
+								Model model) {
+				
+				UserDto dto = busService.findPw(bu_id, bu_tel);
+				model.addAttribute("F_ID",dto);
+				return "login/find_pw";
+				
+			}
 	
-	@ModelAttribute("NEWUSER")
-	public UserDto newUser() {
-		return new UserDto();
+	
+
+	@ResponseBody
+	@RequestMapping(value = "/searchbus/loadDepTer", method = RequestMethod.GET)
+	public List<TerLinkVO> loadDepTer() {
+		return loadDB.loadDepTerData();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/searchbus/loadArrTer", method = RequestMethod.GET)
+	public List<TerLinkVO> loadArrTer(String depTerId) {
+		return loadDB.loadArrTerData(depTerId);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/searchbus/loadSchedule", method = RequestMethod.GET)
+	public List<TerDriveVO> loadSchedule(String depTerId, String arrTerId) {
+		List<TerDriveVO> volist = loadDB.loadTerDriveAndSchedule(depTerId, arrTerId);
+		TerDriveVO closestVO = Utils.setClosestTime(volist);
+		if(closestVO != null) System.out.println(closestVO);
+		
+		return volist;
 	}
 }

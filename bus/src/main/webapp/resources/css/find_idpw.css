@@ -53,7 +53,7 @@ h2.signUpTitle {
   font-family: "Dongle", sans-serif;
 }
 
-form.join {
+/* form.join {
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -83,4 +83,4 @@ form input.joinBtn:active {
 
 form div.sameId {
   color: red;
-}
+} */

@@ -14,8 +14,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class UserDto {
-	private String u_mail;			//	VARCHAR(50)
-	private String u_name;			//	VARCHAR(10)
-	private String u_password;		//	VARCHAR(12)
-	private String u_tel;			//	VARCHAR(13)
+	private String bu_id;			//	VARCHAR(50)
+	private String bu_name;			//	VARCHAR(10)
+	private String bu_password;		//	VARCHAR(12)
+	private String bu_tel;			//	VARCHAR(13)
+	
+	private String id;
+	private String name;
 }

@@ -35,4 +35,11 @@ public class UserServiceImplV1 implements UserService{
 		return userDao.findByPw(u_mail, u_tel);
 	}
 
+
+	@Override
+	public int ninsert(UserDto userDto) {
+		// TODO Auto-generated method stub
+		return userDao.ninsert(userDto);
+	}
+
 }
